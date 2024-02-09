@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import data from "../data.json";
+import { Link } from "react-router-dom";
+
 function Menu() {
   console.log(data);
+
   return (
     <>
       <Header>
@@ -13,13 +16,16 @@ function Menu() {
         {data.map((item) => {
           return (
             <>
-              <Planet>
-                <Circle style={{ backgroundColor: item["circle-color"] }} />
-                <FlexDiv>
-                  <PlanetName>{item.name}</PlanetName>
-                  <Arrow src="/src/assets/icon-chevron.svg" />
-                </FlexDiv>
-              </Planet>
+              <Link to={`${item.name}`}>
+                <Planet>
+                  <Circle style={{ backgroundColor: item["circle-color"] }} />
+                  <FlexDiv>
+                    <PlanetName>{item.name}</PlanetName>
+
+                    <Arrow src="/src/assets/icon-chevron.svg" />
+                  </FlexDiv>
+                </Planet>
+              </Link>
               <BottomLine />
             </>
           );
