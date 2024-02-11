@@ -7,11 +7,6 @@ function Menu() {
 
   return (
     <>
-      <Header>
-        <Title>THE PLANETS</Title>
-        <MenuImg src="/src/assets/icon-hamburger.svg" />
-      </Header>
-      <Line />
       <Main>
         {data.map((item) => {
           return (
@@ -21,12 +16,12 @@ function Menu() {
                   <Circle style={{ backgroundColor: item["circle-color"] }} />
                   <FlexDiv>
                     <PlanetName>{item.name}</PlanetName>
-
                     <Arrow src="/src/assets/icon-chevron.svg" />
                   </FlexDiv>
                 </Planet>
               </Link>
               <BottomLine />
+              {}
             </>
           );
         })}
@@ -36,26 +31,13 @@ function Menu() {
 }
 export default Menu;
 
-const Header = styled.header`
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const Title = styled.h1`
-  color: white;
-`;
-const MenuImg = styled.img``;
-const Line = styled.hr`
-  background-color: #393950;
-  height: 1px;
-`;
 const Main = styled.main`
   display: flex;
   flex-direction: column;
   margin-top: 44px;
   padding: 0 24px;
   gap: 20px;
+  background-image: url(../assets/background-stars.svg);
 `;
 const Planet = styled.div`
   display: flex;
