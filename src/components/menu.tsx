@@ -35,7 +35,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   margin-top: 44px;
-  padding: 0 24px;
+  padding: 0 24px 67px;
   gap: 20px;
   background-image: url(../assets/background-stars.svg);
 `;
@@ -54,7 +54,6 @@ const PlanetName = styled.h2`
   line-height: 25px;
   font-size: 15px;
   color: rgba(255, 255, 255, 1);
-  font-family: "Spartan";
 `;
 const Arrow = styled.img`
   width: 7px;

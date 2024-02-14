@@ -23,6 +23,7 @@ const HeaderBox = styled.header`
 `;
 const Title = styled.h1`
   color: white;
+  font-family: "Antonio";
 `;
 const MenuImg = styled.img``;
 const Line = styled.hr`
