@@ -14,8 +14,8 @@ interface Planet {
   revolution: string;
   radius: string;
   temperature: string;
+  bottomColor: string;
 }
-
 export default function Planets() {
   const location = useParams();
   const currentPlanet = location.planet;
@@ -23,16 +23,19 @@ export default function Planets() {
   const [correctPlanet, setCorrectPlanet] = useState<Planet>(
     data.find((item) => item.name === currentPlanet)!
   );
-  console.log(correctPlanet);
+  console.log(setCorrectPlanet);
+
+  const BottomColor = correctPlanet.bottomColor;
+
   return (
     <Color>
       <Buttons>
         <Overview onClick={() => setInfo("overview")}>OVERVIEW</Overview>
-        <OverviewBottomBorder info={info} />
+        <OverviewBottomBorder info={info} bottomColor={BottomColor} />
         <Structure onClick={() => setInfo("structure")}>STRUCTURE</Structure>
-        <StructureBottomBorder info={info} />
+        <StructureBottomBorder info={info} bottomColor={BottomColor} />
         <Surface onClick={() => setInfo("surface")}>SURFACE </Surface>
-        <SurfaceBottomBorder info={info} />
+        <SurfaceBottomBorder info={info} bottomColor={BottomColor} />
       </Buttons>
       <PlanetImgBox>
         <PlanetImg
@@ -139,27 +142,27 @@ const Surface = styled.button`
   position: absolute;
 `;
 
-const OverviewBottomBorder = styled.div<{ info: string }>`
+const OverviewBottomBorder = styled.div<{ info: string; bottomColor: string }>`
   width: 80px;
   height: 4px;
   background-color: ${(props) =>
-    props.info === "overview" ? `   rgba(65, 158, 187, 1)` : ``};
+    props.info === "overview" ? `  ${props.bottomColor}` : ``};
   position: relative;
   top: 24px;
 `;
-const StructureBottomBorder = styled.div<{ info: string }>`
+const StructureBottomBorder = styled.div<{ info: string; bottomColor: string }>`
   width: 80px;
   height: 4px;
   background-color: ${(props) =>
-    props.info === "structure" ? `   rgba(65, 158, 187, 1)` : ``};
+    props.info === "structure" ? `  ${props.bottomColor}` : ``};
   position: relative;
   top: 24px;
 `;
-const SurfaceBottomBorder = styled.div<{ info: string }>`
+const SurfaceBottomBorder = styled.div<{ info: string; bottomColor: string }>`
   width: 80px;
   height: 4px;
   background-color: ${(props) =>
-    props.info === "surface" ? `   rgba(65, 158, 187, 1)` : ``};
+    props.info === "surface" ? `   ${props.bottomColor}` : ``};
   position: relative;
   top: 24px;
 `;
