@@ -2,7 +2,7 @@ import data from "../data.json";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import iconSource from "../assets/icon-source.svg";
+import iconSource from "/assets/icon-source.svg";
 
 interface Planet {
   name: string;

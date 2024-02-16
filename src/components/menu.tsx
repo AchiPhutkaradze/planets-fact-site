@@ -16,12 +16,11 @@ function Menu() {
                   <Circle style={{ backgroundColor: item["circle-color"] }} />
                   <FlexDiv>
                     <PlanetName>{item.name}</PlanetName>
-                    <Arrow src="/src/assets/icon-chevron.svg" />
+                    <Arrow src="./assets/icon-chevron.svg" />
                   </FlexDiv>
                 </Planet>
               </Link>
               <BottomLine />
-              {}
             </>
           );
         })}
