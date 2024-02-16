@@ -7,7 +7,7 @@ export default function Header() {
       <HeaderBox>
         <Title>THE PLANETS</Title>
         <Link to={"/"}>
-          <MenuImg src="/src/assets/icon-hamburger.svg" />
+          <MenuImg src="../assets/icon-hamburger.svg" />
         </Link>
       </HeaderBox>
       <Line />
