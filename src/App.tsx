@@ -1,8 +1,8 @@
 import "./index.css";
 import Menu from "./components/menu";
 import { Routes, Route } from "react-router-dom";
-import Planets from "./components/planets";
-import Header from "./components/header";
+import Planets from "./components/Planets";
+import Header from "./components/Header";
 
 function App() {
   return (
