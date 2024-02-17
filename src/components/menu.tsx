@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import data from "../data.json";
+import data from "../data/data.json";
 import { Link } from "react-router-dom";
 
 function Menu() {
@@ -16,7 +16,7 @@ function Menu() {
                   <Circle style={{ backgroundColor: item["circle-color"] }} />
                   <FlexDiv>
                     <PlanetName>{item.name}</PlanetName>
-                    <Arrow src="./assets/icon-chevron.svg" />
+                    <Arrow src="../../public/assets/icon-chevron.svg" />
                   </FlexDiv>
                 </Planet>
               </Link>

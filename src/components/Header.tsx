@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import MenuIcon from "../../public/assets/icon-hamburger.svg";
 export default function Header() {
   return (
     <>
       <HeaderBox>
         <Title>THE PLANETS</Title>
         <Link to={"/"}>
-          <MenuImg src="../assets/icon-hamburger.svg" />
+          <MenuImg src={MenuIcon} />
         </Link>
       </HeaderBox>
       <Line />
