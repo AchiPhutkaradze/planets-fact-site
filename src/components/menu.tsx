@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import data from "../data/data.json";
 import { Link } from "react-router-dom";
-
-function Menu() {
-  console.log(data);
+interface Type {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}
+function Menu(props: Type) {
+  props.setCount(1);
 
   return (
     <>
@@ -36,7 +38,6 @@ const Main = styled.main`
   margin-top: 44px;
   padding: 0 24px 67px;
   gap: 20px;
-  background-image: url(../assets/background-stars.svg);
 `;
 const Planet = styled.div`
   display: flex;

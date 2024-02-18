@@ -16,14 +16,16 @@ interface Planet {
   temperature: string;
   bottomColor: string;
 }
-export default function Planets() {
+export default function Planets(props: {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const location = useParams();
   const currentPlanet = location.planet;
   const [info, setInfo] = useState("overview");
   const [correctPlanet, setCorrectPlanet] = useState<Planet>(
     data.find((item) => item.name === currentPlanet)!
   );
-  console.log(setCorrectPlanet);
+  props.setCount(2);
 
   const BottomColor = correctPlanet.bottomColor;
 
@@ -107,8 +109,8 @@ const PlanetImg = styled.img`
   height: 30%;
 `;
 const Color = styled.div`
-  background-image: url(/src/assets/background-stars.svg);
   height: 100vh;
+  background-image: url(../assets/background-stars.svg);
 `;
 const Buttons = styled.div`
   height: 50px;
