@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import iconSource from "/assets/icon-source.svg";
+import { keyframes } from "styled-components";
 
 interface Planet {
   name: string;
@@ -104,13 +105,32 @@ const PlanetImgBox = styled.div`
   justify-content: center;
   padding: 95px 0;
 `;
+const AnimationName = keyframes`
+  from {
+    background-position: 0 0;
+  } 
+  to {
+    background-position: 100% 100%;
+  }
+`;
+const Keyframes = keyframes`
+ from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 const PlanetImg = styled.img`
   width: 30%;
   height: 30%;
+  animation: ${Keyframes} 40s linear infinite;
 `;
+
 const Color = styled.div`
   height: 100vh;
   background-image: url(../assets/background-stars.svg);
+  animation: ${AnimationName} 20s linear infinite;
 `;
 const Buttons = styled.div`
   height: 50px;
