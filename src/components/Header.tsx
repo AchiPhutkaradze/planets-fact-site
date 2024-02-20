@@ -6,7 +6,7 @@ export default function Header(props: { count: number }) {
     <>
       <HeaderBox>
         <Title>THE PLANETS</Title>
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <MenuImg src={MenuIcon} count={props.count} />
         </Link>
       </HeaderBox>

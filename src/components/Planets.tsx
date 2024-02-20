@@ -22,11 +22,11 @@ export default function Planets(props: {
   const location = useParams();
   const currentPlanet = location.planet;
   const [info, setInfo] = useState("overview");
-  const [correctPlanet, setCorrectPlanet] = useState<Planet>(
-    data.find((item) => item.name === currentPlanet)!
+  const correctPlanet: Planet | any = data.find(
+    (item) => item.name === currentPlanet
   );
-  props.setCount(2);
 
+  props.setCount(2);
   const BottomColor = correctPlanet.bottomColor;
 
   return (
