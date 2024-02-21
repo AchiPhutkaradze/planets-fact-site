@@ -20,6 +20,11 @@ const HeaderBox = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+    padding: 0;
+    padding-top: 32px;
+  }
 `;
 const Title = styled.h1`
   color: white;
@@ -27,8 +32,14 @@ const Title = styled.h1`
 `;
 const MenuImg = styled.img<{ count: number }>`
   opacity: ${(props) => (props.count === 1 ? "0.2" : "")};
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 const Line = styled.hr`
   background-color: #393950;
   height: 1px;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;

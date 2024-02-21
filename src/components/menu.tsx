@@ -54,6 +54,7 @@ const PlanetName = styled.h2`
   line-height: 25px;
   font-size: 15px;
   color: rgba(255, 255, 255, 1);
+  text-transform: uppercase;
 `;
 const Arrow = styled.img`
   width: 7px;

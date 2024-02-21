@@ -32,53 +32,55 @@ export default function Planets(props: {
 
   return (
     <Color>
-      <Buttons>
-        <Overview onClick={() => setInfo("overview")}>OVERVIEW</Overview>
-        <OverviewBottomBorder info={info} bottomColor={BottomColor} />
-        <Structure onClick={() => setInfo("structure")}>STRUCTURE</Structure>
-        <StructureBottomBorder info={info} bottomColor={BottomColor} />
-        <Surface onClick={() => setInfo("surface")}>SURFACE </Surface>
-        <SurfaceBottomBorder info={info} bottomColor={BottomColor} />
-      </Buttons>
-      <PlanetImgBox>
-        <PlanetImg
-          src={
-            info === "overview"
-              ? correctPlanet.images.planet
-              : info === "structure"
-              ? correctPlanet.images.internal
-              : correctPlanet.images.geology
-          }
-        />
-      </PlanetImgBox>
-      <Description>
-        <PlanetName>{correctPlanet.name}</PlanetName>
-        <Text>
-          {info === "overview"
-            ? correctPlanet.overview.content
-            : info === "structure"
-            ? correctPlanet.structure.content
-            : info === "surface"
-            ? correctPlanet.geology.content
-            : ""}
-        </Text>
-        <Source>
-          <Wikipedia
-            href={
+      <Wrapper>
+        <Buttons>
+          <Overview onClick={() => setInfo("overview")}>OVERVIEW</Overview>
+          <OverviewBottomBorder info={info} bottomColor={BottomColor} />
+          <Structure onClick={() => setInfo("structure")}>STRUCTURE</Structure>
+          <StructureBottomBorder info={info} bottomColor={BottomColor} />
+          <Surface onClick={() => setInfo("surface")}>SURFACE </Surface>
+          <SurfaceBottomBorder info={info} bottomColor={BottomColor} />
+        </Buttons>
+        <PlanetImgBox>
+          <PlanetImg
+            src={
               info === "overview"
-                ? correctPlanet.overview.source
+                ? correctPlanet.images.planet
                 : info === "structure"
-                ? correctPlanet.structure.source
-                : info === "surface"
-                ? correctPlanet.geology.source
-                : ""
+                ? correctPlanet.images.internal
+                : correctPlanet.images.geology
             }
-          >
-            Source : Wikipedia
-          </Wikipedia>
-          <Icon src={iconSource} />
-        </Source>
-      </Description>
+          />
+        </PlanetImgBox>
+        <Description>
+          <PlanetName>{correctPlanet.name}</PlanetName>
+          <Text>
+            {info === "overview"
+              ? correctPlanet.overview.content
+              : info === "structure"
+              ? correctPlanet.structure.content
+              : info === "surface"
+              ? correctPlanet.geology.content
+              : ""}
+          </Text>
+          <Source>
+            <Wikipedia
+              href={
+                info === "overview"
+                  ? correctPlanet.overview.source
+                  : info === "structure"
+                  ? correctPlanet.structure.source
+                  : info === "surface"
+                  ? correctPlanet.geology.source
+                  : ""
+              }
+            >
+              Source : Wikipedia
+            </Wikipedia>
+            <Icon src={iconSource} />
+          </Source>
+        </Description>
+      </Wrapper>
       <Footer>
         <Child>
           <FirstChild>ROTATION TIME</FirstChild>
@@ -104,6 +106,9 @@ const PlanetImgBox = styled.div`
   display: flex;
   justify-content: center;
   padding: 95px 0;
+  @media screen and (min-width: 768px) {
+    grid-column: 1/-1;
+  }
 `;
 const AnimationName = keyframes`
   from {
@@ -141,6 +146,10 @@ const Buttons = styled.div`
   align-items: center;
   gap: 43px;
   border-bottom: 1px solid #393950;
+  @media screen and (min-width: 768px) {
+    grid-row: 2;
+    grid-column: 2;
+  }
 `;
 const Overview = styled.button`
   width: 80px;
@@ -194,6 +203,9 @@ const Description = styled.div`
   padding: 0 24px;
   align-items: center;
   gap: 16px;
+  @media screen and (min-width: 768px) {
+    grid-row: 2;
+  }
 `;
 const PlanetName = styled.h1`
   color: #c1c1c8;
@@ -242,4 +254,12 @@ const SecondChild = styled.p`
   font-family: "Antonio";
   line-height: 25.88px;
   font-size: 20px;
+`;
+const Wrapper = styled.div`
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    align-items: center;
+  }
 `;
