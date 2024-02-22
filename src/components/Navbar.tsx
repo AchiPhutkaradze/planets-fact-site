@@ -24,8 +24,13 @@ const NavBar = styled.nav`
   opacity: 0.5;
   list-style-type: none;
   gap: 33px;
-  text-transform: uppercase ;
+  text-transform: uppercase;
+  border-bottom: 1px solid #393950;
+  padding-bottom: 27px;
 `;
 const PlanetName = styled.li`
   color: white;
+  line-height: 25px;
+  font-size: 13px;
+  font-weight: 700;
 `;
