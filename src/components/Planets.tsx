@@ -28,7 +28,7 @@ export default function Planets(props: {
   );
 
   props.setCount(2);
-  const BottomColor = correctPlanet.bottomColor;
+  const btnBottomColor = correctPlanet.bottomColor;
 
   return (
     <Color>
@@ -36,28 +36,28 @@ export default function Planets(props: {
         <Buttons>
           <Overview
             info={info}
-            bottomColor={BottomColor}
+            color={btnBottomColor}
             onClick={() => setInfo("overview")}
           >
             OVERVIEW
           </Overview>
-          <OverviewBottomBorder info={info} bottomColor={BottomColor} />
+          <OverviewBottomBorder info={info} color={btnBottomColor} />
           <Structure
             info={info}
-            bottomColor={BottomColor}
+            color={btnBottomColor}
             onClick={() => setInfo("structure")}
           >
             STRUCTURE
           </Structure>
-          <StructureBottomBorder info={info} bottomColor={BottomColor} />
+          <StructureBottomBorder info={info} color={btnBottomColor} />
           <Surface
             info={info}
-            bottomColor={BottomColor}
+            color={btnBottomColor}
             onClick={() => setInfo("surface")}
           >
             SURFACE
           </Surface>
-          <SurfaceBottomBorder info={info} bottomColor={BottomColor} />
+          <SurfaceBottomBorder info={info} color={btnBottomColor} />
         </Buttons>
         <PlanetImgBox>
           <PlanetImg
@@ -127,6 +127,13 @@ const PlanetImgBox = styled.div`
   @media screen and (min-width: 768px) {
     grid-column: 1/-1;
     padding: 120px 0;
+    @media screen and (min-width: 1440px) {
+      grid-column: 1/2;
+      grid-row: 1/-1;
+      justify-content: inherit;
+      bottom: 58px;
+      position: relative;
+    }
   }
 `;
 const AnimationName = keyframes`
@@ -152,6 +159,10 @@ const PlanetImg = styled.img`
   @media screen and (min-width: 768px) {
     width: 33%;
   }
+  @media screen and (min-width: 1440px) {
+    min-width: 450px;
+    height: auto;
+  }
 `;
 
 const Color = styled.div`
@@ -160,6 +171,9 @@ const Color = styled.div`
   animation: ${AnimationName} 20s linear infinite;
   @media screen and (min-width: 768px) {
     padding: 0 40px;
+  }
+  @media screen and (min-width: 1440px) {
+    padding: 0 165px;
   }
 `;
 const Buttons = styled.div`
@@ -182,8 +196,12 @@ const Buttons = styled.div`
     height: 152px;
     justify-content: inherit;
   }
+  @media screen and (min-width: 1440px) {
+    align-self: flex-start;
+    height: 200px;
+  }
 `;
-const Overview = styled.button<{ info: string; bottomColor: string }>`
+const Overview = styled.button<{ info: string; color: string }>`
   width: 80px;
   background-color: rgba(7, 7, 36, 1);
   color: #c1c1c8;
@@ -196,7 +214,7 @@ const Overview = styled.button<{ info: string; bottomColor: string }>`
     width: 100%;
     grid-row: 1;
     background-color: ${(props) =>
-      props.info === "overview" ? `  ${props.bottomColor}` : ``};
+      props.info === "overview" ? `  ${props.color}` : ``};
     padding: 8px 0 7px 20px;
     display: flex;
     gap: 17px;
@@ -207,7 +225,7 @@ const Overview = styled.button<{ info: string; bottomColor: string }>`
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
 `;
-const Structure = styled.button<{ info: string; bottomColor: string }>`
+const Structure = styled.button<{ info: string; color: string }>`
   width: 80px;
   background-color: rgba(7, 7, 36, 1);
   color: #c1c1c8;
@@ -222,7 +240,7 @@ const Structure = styled.button<{ info: string; bottomColor: string }>`
     position: inherit;
     grid-column: inherit;
     background-color: ${(props) =>
-      props.info === "structure" ? `  ${props.bottomColor}` : ``};
+      props.info === "structure" ? `  ${props.color}` : ``};
     width: 100%;
     padding: 8px 0 7px 20px;
     display: flex;
@@ -233,7 +251,7 @@ const Structure = styled.button<{ info: string; bottomColor: string }>`
     grid-column: 1/3;
   }
 `;
-const Surface = styled.button<{ info: string; bottomColor: string }>`
+const Surface = styled.button<{ info: string; color: string }>`
   width: 80px;
   background-color: rgba(7, 7, 36, 1);
   color: #c1c1c8;
@@ -252,7 +270,7 @@ const Surface = styled.button<{ info: string; bottomColor: string }>`
     position: inherit;
     grid-column: inherit;
     background-color: ${(props) =>
-      props.info === "surface" ? `  ${props.bottomColor}` : ``};
+      props.info === "surface" ? `  ${props.color}` : ``};
     width: 100%;
     padding: 8px 0 7px 20px;
     font-size: 15px;
@@ -263,33 +281,33 @@ const Surface = styled.button<{ info: string; bottomColor: string }>`
   }
 `;
 
-const OverviewBottomBorder = styled.div<{ info: string; bottomColor: string }>`
+const OverviewBottomBorder = styled.div<{ info: string; color: string }>`
   width: 80px;
   height: 4px;
   background-color: ${(props) =>
-    props.info === "overview" ? `  ${props.bottomColor}` : ``};
+    props.info === "overview" ? `  ${props.color}` : ``};
   position: relative;
   top: 24px;
   @media screen and (min-width: 768px) {
     display: none;
   }
 `;
-const StructureBottomBorder = styled.div<{ info: string; bottomColor: string }>`
+const StructureBottomBorder = styled.div<{ info: string; color: string }>`
   width: 80px;
   height: 4px;
   background-color: ${(props) =>
-    props.info === "structure" ? `  ${props.bottomColor}` : ``};
+    props.info === "structure" ? `  ${props.color}` : ``};
   position: relative;
   top: 24px;
   @media screen and (min-width: 768px) {
     display: none;
   }
 `;
-const SurfaceBottomBorder = styled.div<{ info: string; bottomColor: string }>`
+const SurfaceBottomBorder = styled.div<{ info: string; color: string }>`
   width: 80px;
   height: 4px;
   background-color: ${(props) =>
-    props.info === "surface" ? `   ${props.bottomColor}` : ``};
+    props.info === "surface" ? `   ${props.color}` : ``};
   position: relative;
   top: 24px;
   @media screen and (min-width: 768px) {
@@ -308,6 +326,9 @@ const Description = styled.div`
     padding: 0;
     width: 339px;
     align-items: start;
+    @media screen and (min-width: 1440px) {
+      grid-row: inherit;
+    }
   }
 `;
 const PlanetName = styled.h1`
@@ -317,6 +338,10 @@ const PlanetName = styled.h1`
   @media screen and (min-width: 768px) {
     font-size: 48px;
     line-height: 61px;
+  }
+  @media screen and (min-width: 1440px) {
+    font-size: 80px;
+    line-height: 103.52px;
   }
 `;
 const Text = styled.p`
@@ -350,6 +375,9 @@ const Footer = styled.div`
     grid-template-rows: inherit;
     padding: 27px 0 36px 0;
   }
+  @media screen and (min-width: 1440px) {
+    gap: 30px;
+  }
 `;
 const Child = styled.div`
   border: 1px solid #1a1a34;
@@ -372,12 +400,20 @@ const FirstChild = styled.p`
   opacity: 0.5;
   color: white;
   font-weight: 700;
+  @media screen and (min-width: 1440px) {
+    font-size: 13px;
+    line-height: 25px;
+  }
 `;
 const SecondChild = styled.p`
   color: rgba(255, 255, 255, 1);
   font-family: "Antonio";
   line-height: 25.88px;
   font-size: 20px;
+  @media screen and (min-width: 1440px) {
+    font-size: 40px;
+    line-height: 51px;
+  }
 `;
 const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -387,5 +423,12 @@ const Wrapper = styled.div`
     align-items: center;
     column-gap: 69px;
     justify-content: space-between;
+    @media screen and (min-width: 1440px) {
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 220px;
+      margin-top: 100px;
+      row-gap: 26px;
+    }
   }
 `;

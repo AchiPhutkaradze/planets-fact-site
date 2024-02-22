@@ -5,23 +5,21 @@ import Planets from "./components/Planets";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import styled from "styled-components";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.pathname);
   const mediaQuery = window.matchMedia("(min-width: 768px)");
-  console.log(mediaQuery.matches);
   const [bigResolution, setBigResolution] = useState<boolean>(
     window.matchMedia("(min-width: 768px)").matches
   );
-
+  console.log(bigResolution);
   useEffect(() => {
     const resolutionChange = (event: MediaQueryListEvent | MediaQueryList) =>
       setBigResolution(event.matches);
     mediaQuery.addListener(resolutionChange);
     resolutionChange(mediaQuery);
   }, []);
-  console.log(bigResolution);
   useEffect(() => {
     if (location.pathname === "/" && mediaQuery.matches) {
       navigate("home/Mercury");
@@ -32,7 +30,9 @@ function App() {
   const [count, setCount] = useState<number>(0);
   return (
     <>
-      <Header count={count} />
+      <Desktop>
+        <Header count={count} />
+      </Desktop>
       {mediaQuery.matches ? <Navbar /> : ""}
       <Routes>
         <Route element={<Menu setCount={setCount} />} path="home" />
@@ -43,3 +43,9 @@ function App() {
 }
 
 export default App;
+
+const Desktop = styled.div`
+  @media screen and (min-width: 1440px) {
+    display: none;
+  }
+`;
