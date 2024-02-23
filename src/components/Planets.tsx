@@ -26,7 +26,6 @@ export default function Planets(props: {
   const correctPlanet: Planet | any = data.find(
     (item) => item.name === currentPlanet
   );
-
   props.setCount(2);
   const btnBottomColor = correctPlanet.bottomColor;
 

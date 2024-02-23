@@ -1,22 +1,36 @@
 import styled from "styled-components";
 import data from "../data/data.json";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 export default function Navbar() {
+  const [selectedPlanet, setSelectedPlanet] = useState<string | undefined>(
+    undefined
+  );
+  const handleClick = (planetName: string) => {
+    setSelectedPlanet(planetName);
+  };
   return (
-    <Container>
+    <Header>
       <Title>THE PLANETS</Title>
       <NavBar>
         {data.map((item) => {
           return (
             <>
               <Link key={item.name} to={`/home/${item.name}`}>
-                <PlanetName key={item.name}>{item.name}</PlanetName>
+                <PlanetName
+                  key={item.name}
+                  onClick={() => handleClick(item.name)}
+                  selected={selectedPlanet === item.name}
+                  btnTopColor={item["circle-color"]}
+                >
+                  {item.name}
+                </PlanetName>
               </Link>
             </>
           );
         })}
       </NavBar>
-    </Container>
+    </Header>
   );
 }
 const NavBar = styled.nav`
@@ -30,18 +44,26 @@ const NavBar = styled.nav`
   text-transform: uppercase;
   padding-bottom: 27px;
   border-bottom: 1px solid #393950;
-  @media screen and (min-width: 1140px) {
+  @media screen and (min-width: 1440px) {
     margin-top: 0px;
     padding-bottom: 0;
     border-bottom: 0;
   }
 `;
-const PlanetName = styled.li`
+const PlanetName = styled.li<{
+  btnTopColor: string | any;
+  selected: boolean;
+}>`
   color: white;
   line-height: 25px;
   font-size: 13px;
   font-weight: 700;
+  @media screen and (min-width: 1440px) {
+    border-top: ${(props) =>
+      props.selected ? `4px solid ${props.btnTopColor}` : ""};
+  }
 `;
+
 const Title = styled.h1`
   display: none;
   @media screen and (min-width: 1440px) {
@@ -52,7 +74,7 @@ const Title = styled.h1`
     font-family: "Antonio";
   }
 `;
-const Container = styled.div`
+const Header = styled.header`
   @media screen and (min-width: 1440px) {
     display: flex;
     align-items: center;
