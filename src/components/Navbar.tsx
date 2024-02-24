@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import data from "../data/data.json";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-export default function Navbar() {
-  const [selectedPlanet, setSelectedPlanet] = useState<string | undefined>(
-    undefined
+import React, { useState } from "react";
+export default function Navbar(props: { sharedInfo: string | undefined }) {
+  const [_selectedPlanet, setSelectedPlanet] = useState<string | undefined>(
+    props.sharedInfo
   );
   const handleClick = (planetName: string) => {
     setSelectedPlanet(planetName);
@@ -15,18 +15,17 @@ export default function Navbar() {
       <NavBar>
         {data.map((item) => {
           return (
-            <>
-              <Link key={item.name} to={`/home/${item.name}`}>
+            <React.Fragment key={item.name}>
+              <Link to={`/home/${item.name}`}>
                 <PlanetName
-                  key={item.name}
                   onClick={() => handleClick(item.name)}
-                  selected={selectedPlanet === item.name}
-                  btnTopColor={item["circle-color"]}
+                  selected={props.sharedInfo === item.name}
+                  color={item["circle-color"]}
                 >
                   {item.name}
                 </PlanetName>
               </Link>
-            </>
+            </React.Fragment>
           );
         })}
       </NavBar>
@@ -48,10 +47,13 @@ const NavBar = styled.nav`
     margin-top: 0px;
     padding-bottom: 0;
     border-bottom: 0;
+    position: absolute;
+    top: 0;
+    right: 40px;
   }
 `;
 const PlanetName = styled.li<{
-  btnTopColor: string | any;
+  color: string;
   selected: boolean;
 }>`
   color: white;
@@ -60,7 +62,11 @@ const PlanetName = styled.li<{
   font-weight: 700;
   @media screen and (min-width: 1440px) {
     border-top: ${(props) =>
-      props.selected ? `4px solid ${props.btnTopColor}` : ""};
+      props.selected ? `4px solid ${props.color}` : ""};
+    padding-top: 40px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 

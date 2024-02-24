@@ -6,14 +6,15 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import styled from "styled-components";
+
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const mediaQuery = window.matchMedia("(min-width: 768px)");
-  const [bigResolution, setBigResolution] = useState<boolean>(
+  const [_bigResolution, setBigResolution] = useState<boolean>(
     window.matchMedia("(min-width: 768px)").matches
   );
-  console.log(bigResolution);
+  const [sharedInfo, setSharedInfo] = useState<string | undefined>();
   useEffect(() => {
     const resolutionChange = (event: MediaQueryListEvent | MediaQueryList) =>
       setBigResolution(event.matches);
@@ -22,21 +23,28 @@ function App() {
   }, []);
   useEffect(() => {
     if (location.pathname === "/" && mediaQuery.matches) {
-      navigate("home/Mercury");
+      navigate("home/Earth");
     } else if (location.pathname === "/" && mediaQuery.matches === false) {
       navigate("home");
     }
   }, [location.pathname, mediaQuery.matches, navigate]);
+  
   const [count, setCount] = useState<number>(0);
+
   return (
     <>
-      <Desktop>
+      <SmallResolution>
         <Header count={count} />
-      </Desktop>
-      {mediaQuery.matches ? <Navbar /> : ""}
+      </SmallResolution>
+      {mediaQuery.matches ? <Navbar sharedInfo={sharedInfo} /> : ""}
       <Routes>
         <Route element={<Menu setCount={setCount} />} path="home" />
-        <Route path="home/:planet" element={<Planets setCount={setCount} />} />
+        <Route
+          path="home/:planet"
+          element={
+            <Planets setCount={setCount} setSharedInfo={setSharedInfo} />
+          }
+        />
       </Routes>
     </>
   );
@@ -44,7 +52,7 @@ function App() {
 
 export default App;
 
-const Desktop = styled.div`
+const SmallResolution = styled.div`
   @media screen and (min-width: 1440px) {
     display: none;
   }

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import data from "../data/data.json";
 import { Link } from "react-router-dom";
@@ -12,7 +13,7 @@ function Menu(props: Type) {
       <Main>
         {data.map((item) => {
           return (
-            <>
+            <React.Fragment key={item.name}>
               <Link to={`${item.name}`}>
                 <Planet>
                   <Circle style={{ backgroundColor: item["circle-color"] }} />
@@ -23,7 +24,7 @@ function Menu(props: Type) {
                 </Planet>
               </Link>
               <BottomLine />
-            </>
+            </React.Fragment>
           );
         })}
       </Main>

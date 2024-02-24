@@ -1,16 +1,29 @@
 import data from "../data/data.json";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import iconSource from "/assets/icon-source.svg";
 import { keyframes } from "styled-components";
 
 interface Planet {
   name: string;
-  overview: object | string | any;
-  images: object | string | any;
-  structure: object | string | any;
-  geology: any;
+  overview: {
+    content: string;
+    source: string;
+  };
+  structure: {
+    content: string;
+    source: string;
+  };
+  geology: {
+    content: string;
+    source: string;
+  };
+  images: {
+    planet: string;
+    internal: string;
+    geology: string;
+  };
   rotation: string;
   revolution: string;
   radius: string;
@@ -19,16 +32,18 @@ interface Planet {
 }
 export default function Planets(props: {
   setCount: React.Dispatch<React.SetStateAction<number>>;
+  setSharedInfo: React.Dispatch<React.SetStateAction<string | undefined>>;
 }) {
   const location = useParams();
   const currentPlanet = location.planet;
   const [info, setInfo] = useState("overview");
-  const correctPlanet: Planet | any = data.find(
+  const correctPlanet: Planet = data.find(
     (item) => item.name === currentPlanet
-  );
-  props.setCount(2);
+  )!;
   const btnBottomColor = correctPlanet.bottomColor;
-
+  useEffect(() => {
+    return props.setCount(2), props.setSharedInfo(correctPlanet.name);
+  });
   return (
     <Color>
       <Wrapper>
@@ -97,25 +112,25 @@ export default function Planets(props: {
             <Icon src={iconSource} />
           </Source>
         </Description>
+        <Footer>
+          <Child>
+            <FirstChild>ROTATION TIME</FirstChild>
+            <SecondChild> {correctPlanet.rotation}</SecondChild>
+          </Child>
+          <Child>
+            <FirstChild>REVOLUTION TIME</FirstChild>
+            <SecondChild> {correctPlanet.revolution}</SecondChild>
+          </Child>
+          <Child>
+            <FirstChild>RADIUS</FirstChild>
+            <SecondChild> {correctPlanet.radius}</SecondChild>
+          </Child>
+          <Child>
+            <FirstChild>AVERAGE TEMP.</FirstChild>
+            <SecondChild> {correctPlanet.temperature}</SecondChild>
+          </Child>
+        </Footer>
       </Wrapper>
-      <Footer>
-        <Child>
-          <FirstChild>ROTATION TIME</FirstChild>
-          <SecondChild> {correctPlanet.rotation}</SecondChild>
-        </Child>
-        <Child>
-          <FirstChild>REVOLUTION TIME</FirstChild>
-          <SecondChild> {correctPlanet.revolution}</SecondChild>
-        </Child>
-        <Child>
-          <FirstChild>RADIUS</FirstChild>
-          <SecondChild> {correctPlanet.radius}</SecondChild>
-        </Child>
-        <Child>
-          <FirstChild>AVERAGE TEMP.</FirstChild>
-          <SecondChild> {correctPlanet.temperature}</SecondChild>
-        </Child>
-      </Footer>
     </Color>
   );
 }
@@ -125,12 +140,11 @@ const PlanetImgBox = styled.div`
   padding: 95px 0;
   @media screen and (min-width: 768px) {
     grid-column: 1/-1;
-    padding: 120px 0;
+    padding: 100px 0;
     @media screen and (min-width: 1440px) {
       grid-column: 1/2;
       grid-row: 1/-1;
-      justify-content: inherit;
-      bottom: 58px;
+      bottom: 20px;
       position: relative;
     }
   }
@@ -222,6 +236,15 @@ const Overview = styled.button<{ info: string; color: string }>`
     font-size: 15px;
     line-height: 25px;
     border: 1px solid rgba(255, 255, 255, 0.5);
+    letter-spacing: 2.57px;
+    color: rgba(255, 255, 255, 1);
+    @media screen and (min-width: 1440px) {
+      &:hover {
+        cursor: pointer;
+        background-color: #313148;
+        color: white;
+      }
+    }
   }
 `;
 const Structure = styled.button<{ info: string; color: string }>`
@@ -248,6 +271,15 @@ const Structure = styled.button<{ info: string; color: string }>`
     line-height: 25px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     grid-column: 1/3;
+    letter-spacing: 2.57px;
+    color: rgba(255, 255, 255, 1);
+    @media screen and (min-width: 1440px) {
+      &:hover {
+        cursor: pointer;
+        background-color: #313148;
+        color: white;
+      }
+    }
   }
 `;
 const Surface = styled.button<{ info: string; color: string }>`
@@ -277,6 +309,15 @@ const Surface = styled.button<{ info: string; color: string }>`
     border: 1px solid rgba(255, 255, 255, 0.5);
     text-align: start;
     grid-column: 1/3;
+    letter-spacing: 2.57px;
+    color: rgba(255, 255, 255, 1);
+    @media screen and (min-width: 1440px) {
+      &:hover {
+        cursor: pointer;
+        background-color: #313148;
+        color: white;
+      }
+    }
   }
 `;
 
@@ -371,11 +412,13 @@ const Footer = styled.div`
   padding: 28px 24px 47px 24px;
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: inherit;
+    grid-template-rows: none;
     padding: 27px 0 36px 0;
+    grid-column: 1/-1;
   }
   @media screen and (min-width: 1440px) {
     gap: 30px;
+    padding: 60px 0 56px 0;
   }
 `;
 const Child = styled.div`
@@ -428,6 +471,7 @@ const Wrapper = styled.div`
       column-gap: 220px;
       margin-top: 100px;
       row-gap: 26px;
+      height: 790px;
     }
   }
 `;
